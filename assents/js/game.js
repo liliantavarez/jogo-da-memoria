@@ -6,8 +6,7 @@ let game = {
   setCard: function (id) {
     //reservando carta que foi virada
     let card = this.cards.filter((card) => card[0].id === id)[0][0];
-    console.log(card)
-    
+
     //verificar se carta ja esta virada ou se esta esperando virar a proxima
     if (card.flipped || this.lockMode) {
       return false;
@@ -16,11 +15,11 @@ let game = {
     //varifica se é a primeira carta virada caso nao seja insere como sendo a segunda carta
     if (!this.firstCard) {
       this.firstCard = card;
-      this.firstCard.flipped = true
+      this.firstCard.flipped = true;
       return true;
     } else {
       this.secondCard = card;
-      this.secondCard.flipped = true
+      this.secondCard.flipped = true;
       this.lockMode = true;
       return true;
     }
@@ -28,23 +27,28 @@ let game = {
 
   //verificando se cartas são iguais
   checkMatch: function () {
-    if(!this.firstCard || !this.secondCard){
-      return false
+    if (!this.firstCard || !this.secondCard) {
+      return false;
     }
-    return this.firstCard.icon == this.secondCard.icon
+    return this.firstCard.icon == this.secondCard.icon;
   },
 
-  //resetando variaveis para proxima verificação 
+  //resetando variaveis para proxima verificação
   clearCards: function () {
     this.firstCard = null;
     this.secondCard = null;
     this.lockMode = false;
   },
 
-  unflipCards: function(){
-    this.firstCard.flipped = false
-    this.secondCard.flipped = false
-    this.clearCards()
+  unflipCards: function () {
+    this.firstCard.flipped = false;
+    this.secondCard.flipped = false;
+    this.clearCards();
+  },
+
+  //verifica quais cartas não estão viradas
+  checkGameOver() {
+    return this.cards.filter((card) => !card[0].flipped).length == 0;
   },
 
   cardsIcons: [
@@ -106,5 +110,4 @@ let game = {
       ];
     }
   },
-}
-
+};

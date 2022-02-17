@@ -14,6 +14,7 @@ function startGame() {
 function initializeCards(cards) {
   //acessando o elemento html onde sera inserido as cartas
   let gameBoard = document.getElementById("gameBoard");
+  gameBoard.innerHTML = "";
 
   //usando loop para criar todas as cartas do array
   cards.forEach((card) => {
@@ -67,6 +68,11 @@ function flipCard() {
     if (game.secondCard) {
       if (game.checkMatch()) {
         game.clearCards();
+        //verifica se todas as cartas estão viradas
+        if (game.checkGameOver()) {
+          let gameOverLayer = document.getElementById("gameOver");
+          gameOverLayer.style.display = "flex";
+        }
       } else {
         //inserindo um intervalo para que as cartas sejam desviradas
         setTimeout(() => {
@@ -75,9 +81,16 @@ function flipCard() {
           let secondCardView = document.getElementById(game.secondCard.id);
           firstCardView.classList.remove("flip");
           secondCardView.classList.remove("flip");
-          game.unflipCards()
+          game.unflipCards();
         }, 1000);
       }
     }
   }
+}
+
+function restart() {
+  let gameOverLayer = document.getElementById("gameOver");
+  gameOverLayer.style.display = "none";
+  game.clearCards();
+  startGame();
 }
