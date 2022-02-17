@@ -1,12 +1,48 @@
 let game = {
+  lockMode: false,
+  firstCard: null,
+  secondCard: null,
+
+  setCard: function (id) {
+    //reservando carta que foi virada
+    let card = this.cards.filter((card) => card[0].id === id)[0][0];
+    
+    //verificar se carta ja esta virada ou se esta esperando virar a proxima
+    if (card.flipped || this.lockMode) {
+      return false;
+    }
+
+    //varifica se é a primeira carta virada caso nao seja insere como sendo a segunda carta
+    if (!this.firstCard) {
+      this.firstCard = card;
+      return true;
+    } else {
+      this.secondCard = card;
+      this.lockMode = true;
+      return true;
+    }
+  },
+
+  //verificando se cartas são iguais
+  checkMatch: function () {
+    if (this.firstCard.icon == this.secondCard.icon) {
+      return true;
+    }
+  },
+
+  //resetando variaveis para proxima verificação 
+  clearCards: function () {
+    this.firstCard = null;
+    this.secondCard = null;
+    this.lockMode = false;
+  },
+
   cardsIcons: [
     "cups",
-    "designer-cat",
     "designer",
     "gamer",
     "laptop",
     "microphone",
-    "programmer-girl",
     "programmer",
     "science",
     "workplace",
@@ -46,7 +82,7 @@ let game = {
   },
 
   //embaralhando as cartas dentro do array
-  shuffleCards: function (cards) {
+  shuffleCards: function () {
     let currentIndex = this.cards.length;
     let randomIndex = 0;
 
@@ -60,4 +96,5 @@ let game = {
       ];
     }
   },
-};
+}
+
