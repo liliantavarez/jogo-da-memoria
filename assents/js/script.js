@@ -64,18 +64,20 @@ function flipCard() {
   //pega as cartas selecionadas, vira e verifica se são iguais
   if (game.setCard(this.id)) {
     this.classList.add("flip");
-    if (game.checkMatch()) {
-      game.clearCards();
-    } else {
-      //inserindo um intervalo para que as cartas sejam desviradas
-      setTimeout(() => {
-        //desvira cartas caso sejam diferentes
-        let firstCardView = document.getElementById(game.firstCard.id);
-        let secondCardView = document.getElementById(game.secondCard.id);
-        firstCardView.classList.remove("flip");
-        secondCardView.classList.remove("flip");
-        game.clearCards()
-      }, 1000);
+    if (game.secondCard) {
+      if (game.checkMatch()) {
+        game.clearCards();
+      } else {
+        //inserindo um intervalo para que as cartas sejam desviradas
+        setTimeout(() => {
+          //desvira cartas caso sejam diferentes
+          let firstCardView = document.getElementById(game.firstCard.id);
+          let secondCardView = document.getElementById(game.secondCard.id);
+          firstCardView.classList.remove("flip");
+          secondCardView.classList.remove("flip");
+          game.unflipCards()
+        }, 1000);
+      }
     }
   }
 }
