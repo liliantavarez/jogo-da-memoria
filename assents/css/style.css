@@ -5,17 +5,17 @@
 }
 body {
     font-family: 'Righteous', sans-serif;
+    background-color: #05c5ff4b;
 }
 #gameBoard{
-    margin: 30px auto 0 auto;
+    margin: 100px auto;
     display: flex;
     flex-wrap: wrap;
-    width: 700px;
-
+    width: 500px;
 }
 .card {
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
     margin: 10px;
     position: relative;
     transform-style: preserve-3d;
@@ -34,8 +34,8 @@ body {
 }
 
 .icon {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
 }
 
 .card_front,
@@ -62,12 +62,12 @@ body {
     background-color: rgba(0, 0, 0, 0.9);
     color: white;
     font-size: 50px;
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    display: none;
     top:0;
+    text-align: center;
 }
 
 #restart{
